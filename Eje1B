@@ -37,4 +37,12 @@ FROM
 GROUP BY 
  Customer_ID;
 
-<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<CREATE TABLE EtapasdeDesarrollo (
+Desarrollo INT (10) NOT NULL,
+Etapa int (1) NOT NULL,
+Finalizado VARCHAR(15) NOT NULL,
+PRIMARY KEY(Desarrollo,Etapa,Finalizado)
+);
+
+INSERT INTO EtapasdeDesarrollo (Desarrollo,Etapa,Finalizado)
+values ('RestAPI','1','01/02/2024');
