@@ -17,3 +17,4 @@ INSERT INTO DirectorioTelefónico (Customer_ID,TypePhone,Number)
 values ('2002','Trabajo','3338129856');
 INSERT INTO DirectorioTelefónico (Customer_ID,TypePhone,Number)
 values ('3003','Celular','3339876541');
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
