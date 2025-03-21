@@ -42,10 +42,9 @@ GROUP BY
 
 
 CREATE TABLE EtapasdeDesarrollo (
-Desarrollo INT (10) NOT NULL,
+Desarrollo VARCHAR(15) NOT NULL,
 Etapa int (1) NOT NULL,
-Finalizado VARCHAR(15) NOT NULL,
-PRIMARY KEY(Desarrollo,Etapa,Finalizado)
+Finalizado VARCHAR(15) NOT NULL
 );
 
 INSERT INTO EtapasdeDesarrollo (Desarrollo,Etapa,Finalizado)
@@ -64,10 +63,10 @@ INSERT INTO EtapasdeDesarrollo (Desarrollo,Etapa,Finalizado)
 values ('Web','2','20/11/2024');
 
 INSERT INTO EtapasdeDesarrollo (Desarrollo,Etapa,Finalizado)
-values ('Web','3');
+values ('Web','3','NOT NULL');
 
 INSERT INTO EtapasdeDesarrollo (Desarrollo,Etapa,Finalizado)
 values ('App','1','30/01/2025');
 
 INSERT INTO EtapasdeDesarrollo (Desarrollo,Etapa,Finalizado)
-values ('App','2');
+values ('App','2','NOT NULL');
