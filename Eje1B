@@ -116,6 +116,9 @@ values ('3003','Astrónomo');
 INSERT INTO Candidatos (Id_candidato,Descripcion)
 values ('4004','Ingeniero');
 
-SELECT Id_candidato from Candidatos where Id_candidato = '1001'
-ta mal no lo confirme :(
+SELECT Id_candidato 
+    FROM Candidatos 
+    WHERE Descripcion IN ('Geologo', 'Astronomo', 'Tecnico')
+    GROUP BY Id_candidato
+    HAVING COUNT(DISTINCT Descripcion) = 3;
 
