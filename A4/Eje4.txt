@@ -93,6 +93,7 @@ ON A.Licencia = B.Licencia
 AND A.Id_empleado <> B.Id_empleado
 GROUP BY A.Id_empleado, B.Id_empleado
 HAVING COUNT(*) = 3;
+
 ----------------------------------------------------------------------------------------------------------
 create table Mean_Median_Mode_y_Range ( 
 Entero VARCHAR(5) NOT NULL
