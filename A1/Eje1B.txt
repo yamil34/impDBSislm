@@ -1,0 +1,124 @@
+CREATE TABLE DirectorioTelefónico (
+Customer_ID INT (15) NOT NULL, 
+TypePhone VARCHAR (10) NOT NULL,
+Number VARCHAR (10) NOT NULL,
+PRIMARY KEY (Customer_ID,TypePhone,Number)
+);
+
+INSERT INTO DirectorioTelefónico (Customer_ID,TypePhone,Number)
+values ('1001','Celular','3338975421');
+INSERT INTO DirectorioTelefónico (Customer_ID,TypePhone,Number)
+values ('1001','Trabajo','3338976542');
+INSERT INTO DirectorioTelefónico (Customer_ID,TypePhone,Number)
+values ('1001', 'Casa' ,'3336989874');
+INSERT INTO DirectorioTelefónico (Customer_ID,TypePhone,Number)
+values ('2002', 'Celular', '3339636544');
+INSERT INTO DirectorioTelefónico (Customer_ID,TypePhone,Number)
+values ('2002','Trabajo','3338129856');
+INSERT INTO DirectorioTelefónico (Customer_ID,TypePhone,Number)
+values ('3003','Celular','3339876541');
+
+
+CREATE TABLE NumerodelDispositivo (
+Customer_ID int NOT NULL,
+ Celular VARCHAR(10),
+Trabajo VARCHAR(10),
+PRIMARY KEY (Customer_ID)
+);
+
+
+SELECT 
+ Customer_ID,
+MAX(CASE WHEN TypePhone = 'Celular' THEN Number END) AS 'Celular',
+MAX(CASE WHEN TypePhone = 'Trabajo' THEN Number END) AS 'Trabajo',
+MAX(CASE WHEN TypePhone = 'Casa' THEN Number END) AS 'Casa'
+FROM 
+ DirectorioTelefónico 
+GROUP BY 
+ Customer_ID;
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+CREATE TABLE EtapasdeDesarrollo (
+Desarrollo VARCHAR(15) NOT NULL,
+Etapa int (1) NOT NULL,
+Finalizado VARCHAR(15) NOT NULL
+);
+
+INSERT INTO EtapasdeDesarrollo (Desarrollo,Etapa,Finalizado)
+values ('RestAPI','1','01/02/2024');
+
+INSERT INTO EtapasdeDesarrollo (Desarrollo,Etapa,Finalizado)
+values ('RestAPI','2','30/05/2024');
+
+INSERT INTO EtapasdeDesarrollo (Desarrollo,Etapa,Finalizado)
+values ('RestAPI','3','29/06/2024');
+
+INSERT INTO EtapasdeDesarrollo (Desarrollo,Etapa,Finalizado)
+values ('Web','1','28/10/2024');
+
+INSERT INTO EtapasdeDesarrollo (Desarrollo,Etapa,Finalizado)
+values ('Web','2','20/11/2024');
+
+INSERT INTO EtapasdeDesarrollo (Desarrollo,Etapa,Finalizado)
+values ('Web','3','NOT NULL');
+
+INSERT INTO EtapasdeDesarrollo (Desarrollo,Etapa,Finalizado)
+values ('App','1','30/01/2025');
+
+INSERT INTO EtapasdeDesarrollo (Desarrollo,Etapa,Finalizado)
+values ('App','2','NOT NULL');
+
+SELECT Desarrollo from EtapasdeDesarrollo where Finalizado = 'NOT NULL' 
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+CREATE TABLE Descripción (
+Geólogo VARCHAR(10)NOT NULL,
+Astrónomo VARCHAR(10) NOT NULL,
+Técnico VARCHAR(10) NOT NULL
+); 
+
+CREATE TABLE Candidatos (
+Id_candidato INT (5) NOT NULL,
+Descripcion VARCHAR(15) NOT NULL
+);
+
+INSERT INTO Candidatos (Id_candidato,Descripcion)
+values ('1001','Geólogo'); 
+
+INSERT INTO Candidatos (Id_candidato,Descripcion)
+values ('1001','Astronomo');
+
+INSERT INTO Candidatos (Id_candidato,Descripcion)
+values ('1001','Bioquímico');
+
+INSERT INTO Candidatos (Id_candidato,Descripcion)
+values ('1001','Técnico');
+
+INSERT INTO Candidatos (Id_candidato,Descripcion)
+values ('2002','Cirujano');
+
+INSERT INTO Candidatos (Id_candidato,Descripcion)
+values ('2002','Cirujano');
+
+INSERT INTO Candidatos (Id_candidato,Descripcion)
+values ('2002','Geólogo');
+
+INSERT INTO Candidatos (Id_candidato,Descripcion)
+values ('3003','Geólogo');
+
+INSERT INTO Candidatos (Id_candidato,Descripcion)
+values ('3003','Astrónomo');
+
+INSERT INTO Candidatos (Id_candidato,Descripcion)
+values ('4004','Ingeniero');
+
+SELECT Id_candidato 
+    FROM Candidatos 
+    WHERE Descripcion IN ('Geologo', 'Astronomo', 'Tecnico')
+    GROUP BY Id_candidato
+    HAVING COUNT(DISTINCT Descripcion) = 3;
+
