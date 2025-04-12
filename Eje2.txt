@@ -1,0 +1,128 @@
+CREATe TABLE Carrito1 (
+Articulos1 TINYTEXT
+);
+ 
+INSERT INTO Carrito1 (Articulos1)
+values ('Azucar');
+
+
+INSERT INTO Carrito1 (Articulos1)
+values ('Pan');
+
+
+INSERT INTO Carrito1 (Articulos1)
+values ('Jugo');
+
+
+INSERT INTO Carrito1 (Articulos1)
+values ('Refrescor');
+
+
+INSERT INTO Carrito1 (Articulos1)
+values ('Harina');
+
+
+CREATe TABLE Carrito2 (
+Articulos2 TINYTEXT NOT NULL
+);
+ 
+
+
+INSERT INTO Carrito2 (Articulos2)
+values ('Azucar');
+
+
+INSERT INTO Carrito2 (Articulos2)
+values ('Pan');
+
+
+INSERT INTO Carrito2 (Articulos2)
+values ('Mantequilla');
+
+
+INSERT INTO Carrito2 (Articulos2)
+values ('Queso');
+
+
+INSERT INTO Carrito2 (Articulos2)
+values ('Manzana');
+
+
+SELECT * FROM Carrito1 LEFT OUTER JOIN Carrito2 ON articulos1 =articulos2 union SELECT * FROM Carrito1 RIGHT OUTER JOIN Carrito2
+ON articulos1=articulos2;
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+
+CREATE TABLE valores (
+Id_empleado VARCHAR(15) NOT NULL,
+Id_gerente VARCHAR(15) default NULL,
+Puesto VARCHAR(15) NOT NULL
+);
+
+INSERT INTO valores (Id_empleado,Puesto)
+values ('1001','Presidente');
+
+INSERT INTO valores (Id_empleado,Id_gerente,Puesto)
+values ('2002','1001','Director');
+
+INSERT INTO valores (Id_empleado,Id_gerente,Puesto)
+values ('3003','1001','Gerente');
+
+INSERT INTO valores (Id_empleado,Id_gerente,Puesto)
+values ('4004','2002','Ingeniero');
+
+INSERT INTO valores (Id_empleado,Id_gerente,Puesto)
+values ('5005','2002','Contador');
+
+INSERT INTO valores (Id_empleado,Id_gerente,Puesto)
+values ('6006','2002','Administrador');
+
+
+WITH RECURSIVE Jerarquia AS (
+    SELECT Id_empleado, Id_gerente, Puesto, 0 AS Nivel
+    FROM valores 
+    WHERE Id_gerente IS NULL
+    union all
+    SELECT e.Id_empleado, e.Id_gerente, e.Puesto, j.Nivel + 1
+    FROM valores e
+    JOIN Jerarquia j ON e.Id_gerente = j.Id_empleado
+    )
+    SELECT * FROM Jerarquia ORDER BY Nivel, Id_empleado;
+
+--------------------------------------------------------------------------------------------------
+
+CREATE TABLE predicados (
+Id_cliente VARCHAR(15) NOT NULL,
+Id_Orden VARCHAR(15) NOT NULL,
+Estado_Destino VARCHAR(15),
+Costo VARCHAR(15) NOT NULL
+);
+
+INSERT INTO predicados (Id_cliente,Id_Orden,Estado_Destino,Costo)
+values ('1001','1','JAL','$987');
+
+INSERT INTO predicados (Id_cliente,Id_Orden,Estado_Destino,Costo)
+values ('1001','2','CDMX','$400');
+
+INSERT INTO predicados (Id_cliente,Id_Orden,Estado_Destino,Costo)
+values ('1001','3','CDMX','$545');
+
+INSERT INTO predicados (Id_cliente,Id_Orden,Estado_Destino,Costo)
+values ('1001','4','CDMX','$321');
+
+INSERT INTO predicados (Id_cliente,Id_Orden,Estado_Destino,Costo)
+values ('2002','5','MTY','$324');
+
+INSERT INTO predicados (Id_cliente,Id_Orden,Estado_Destino,Costo)
+values ('3003','6','JAL','$931');
+
+INSERT INTO predicados (Id_cliente,Id_Orden,Estado_Destino,Costo)
+values ('4004','7','JAL','$876');
+
+INSERT INTO predicados (Id_cliente,Id_Orden,Estado_Destino,Costo)
+values ('5005','8','CDMX','$567');
+
+select * FROM predicados where id_cliente=1001 AND Estado_Destino='CDMX';
+
