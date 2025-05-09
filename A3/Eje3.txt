@@ -1,0 +1,106 @@
+Create table pruebas (
+Caso VARCHAR(1) NOT NULL
+);
+
+INSERT INTO pruebas (Caso)
+values('A');
+
+INSERT INTO pruebas (Caso)
+values('B');
+
+INSERT INTO pruebas (Caso)
+values('C');
+  
+SELECT 
+  CONCAT(A.caso, ',', B.caso, ',', C.caso) AS permutacion
+FROM 
+  experimento A 
+  CROSS JOIN experimento B
+  CROSS JOIN experimento C
+WHERE 
+  A.caso <> B.caso
+  AND A.caso <> C.caso
+  AND B.caso <> C.caso;
+
+------------------------------------------------------------------------------------------------
+
+create table Promedio (
+Desarrollo VARCHAR(15) NOT NULL,
+Terminacion VARCHAR(15) NOT NULL
+);
+
+INSERT INTO Promedio (Desarrollo,Terminacion)
+values('RestAPI,'06/01/2024');
+
+
+INSERT INTO Promedio (Desarrollo,Terminacion)
+values('RestAPI','06/14/2024');
+
+
+INSERT INTO Promedio (Desarrollo,Terminacion)
+values('RestAPI,06/15/2024');
+
+
+INSERT INTO Promedio (Desarrollo,Terminacion)
+values('Web','06/01/2014');
+
+
+INSERT INTO Promedio (Desarrollo,Terminacion)
+values('Web','06/02/2024');
+
+
+INSERT INTO Promedio (Desarrollo,Terminacion)
+values('Web','06/19/2024');
+
+
+INSERT INTO Promedio (Desarrollo,Terminacion)
+values('App','06/01/2024');
+
+
+INSERT INTO Promedio (Desarrollo,Terminacion)
+values ('App','05/15/2024');
+
+
+INSERT INTO Promedio (Desarrollo,Terminacion)
+values('App','06/30/2024');
+
+
+SELECT desarrollo, AVG(DIFERENCIA) AS promedio
+   FROM (
+     SELECT desarrollo, DATEDIFF(terminacion, LAG(terminacion) OVER (PARTITION BY desarrollo ORDER BY terminacion)) AS DIFERENCIA
+    FROM Promedio
+      ) AS A
+   GROUP BY desarrollo;
+
+---------------------------------------------------------------------------------------------------------------------------------
+create table Inventarios (
+Fecha VARCHAR(15) NOT NULL,
+Ajuste VARCHAR(15) NOT NULL
+);
+
+
+INSERT INTO Inventarios (Fecha,Ajuste)
+values('03/01/2025','100');
+
+
+INSERT INTO Inventarios (Fecha,Ajuste)
+values('04/01/2025','75');
+
+
+INSERT INTO Inventarios (Fecha,Ajuste)
+values ('05/01/2025','-150');
+
+
+INSERT INTO Inventarios (Fecha,Ajuste)
+values ('06/01/2025','50');
+
+
+INSERT INTO Inventarios (Fecha,Ajuste)
+values ('07/01/2025','-70');
+
+
+SELECT Fecha,
+     Ajuste,
+     SUM(ajuste) OVER (ORDER BY Fecha) AS Inventario
+ FROM Inventarios;
+
