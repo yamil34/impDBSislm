@@ -1,0 +1,12 @@
+SELECT ip, COUNT(*) AS invalid_count
+FROM logs
+WHERE 
+    LENGTH(ip) - LENGTH(REPLACE(ip, '.', '')) + 1 != 4
+    OR CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(ip, '.', 1), '.', -1) AS UNSIGNED) > 255
+    OR CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(ip, '.', 2), '.', -1) AS UNSIGNED) > 255
+    OR CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(ip, '.', 3), '.', -1) AS UNSIGNED) > 255
+    OR CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(ip, '.', 4), '.', -1) AS UNSIGNED) > 255
+    OR ip LIKE '%\.0%' OR ip LIKE '0%' OR ip LIKE '%.0%'
+GROUP BY ip
+ORDER BY invalid_count DESC, ip DESC;
+
